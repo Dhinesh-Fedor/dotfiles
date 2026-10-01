@@ -1,0 +1,6 @@
+[Unit]
+Description=Refresh Waypaper styling from the Caelestia color scheme
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/waypaper-caelestia-theme

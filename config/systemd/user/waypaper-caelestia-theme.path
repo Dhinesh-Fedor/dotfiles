@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch the Caelestia color scheme for Waypaper
+
+[Path]
+PathChanged=%h/.local/state/caelestia/scheme.json
+Unit=waypaper-caelestia-theme.service
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=GTKLock Screen Locker
+Documentation=man:gtklock(1)
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/gtklock
+Restart=no

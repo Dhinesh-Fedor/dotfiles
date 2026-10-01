@@ -1,0 +1,272 @@
+{
+    "appearance": {
+        "transparency": {
+            "base": 0.8452922840150251,
+            "enabled": true
+        }
+    },
+    "background": {
+        "desktopClock": {
+            "enabled": true,
+            "position": "top-right"
+        },
+        "enabled": true,
+        "wallpaperEnabled": true
+    },
+    "bar": {
+        "activeWindow": {
+            "compact": false,
+            "inverted": false,
+            "showOnHover": true
+        },
+        "clock": {
+            "background": true,
+            "showDate": true,
+            "showIcon": true
+        },
+        "persistent": true,
+        "popouts": {
+            "activeWindow": true
+        },
+        "scrollActions": {
+            "volume": true
+        },
+        "statusIcons": [
+            {
+                "enabled": true,
+                "id": "audio"
+            },
+            {
+                "enabled": true,
+                "id": "microphone"
+            },
+            {
+                "enabled": true,
+                "id": "network"
+            },
+            {
+                "enabled": true,
+                "id": "bluetooth"
+            },
+            {
+                "enabled": true,
+                "id": "battery"
+            },
+            {
+                "enabled": true,
+                "id": "lockStatus"
+            },
+            {
+                "enabled": true,
+                "id": "kbLayout"
+            }
+        ],
+        "tray": {
+            "background": true,
+            "compact": false,
+            "recolour": true
+        },
+        "workspaces": {
+            "activeIndicator": true,
+            "activeTrail": true,
+            "maxWindowIcons": 5,
+            "occupiedBg": false,
+            "showWindows": true,
+            "shown": 5
+        }
+    },
+    "general": {
+        "apps": {
+            "explorer": [
+                "nautilus",
+                "--new-window"
+            ],
+            "playback": [
+                "mpv",
+                "--player-operation-mode=pseudo-gui",
+                "--"
+            ]
+        }
+    },
+    "launcher": {
+        "actions": [
+            {
+                "command": [
+                    "autocomplete",
+                    "calc"
+                ],
+                "description": "Do simple math equations (powered by Qalc)",
+                "icon": "calculate",
+                "name": "Calculator"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "scheme"
+                ],
+                "description": "Change the current colour scheme",
+                "icon": "palette",
+                "name": "Scheme"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "wallpaper"
+                ],
+                "description": "Change the current wallpaper",
+                "icon": "image",
+                "name": "Wallpaper"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "variant"
+                ],
+                "description": "Change the current scheme variant",
+                "icon": "colors",
+                "name": "Variant"
+            },
+            {
+                "command": [
+                    "caelestia",
+                    "wallpaper",
+                    "-r"
+                ],
+                "description": "Switch to a random wallpaper",
+                "icon": "casino",
+                "name": "Random"
+            },
+            {
+                "command": [
+                    "setMode",
+                    "light"
+                ],
+                "description": "Change the scheme to light mode",
+                "icon": "light_mode",
+                "name": "Light"
+            },
+            {
+                "command": [
+                    "setMode",
+                    "dark"
+                ],
+                "description": "Change the scheme to dark mode",
+                "icon": "dark_mode",
+                "name": "Dark"
+            },
+            {
+                "command": [
+                    "systemctl",
+                    "poweroff"
+                ],
+                "dangerous": true,
+                "description": "Shutdown the system",
+                "icon": "power_settings_new",
+                "name": "Shutdown"
+            },
+            {
+                "command": [
+                    "systemctl",
+                    "reboot"
+                ],
+                "dangerous": true,
+                "description": "Reboot the system",
+                "icon": "cached",
+                "name": "Reboot"
+            },
+            {
+                "command": [
+                    "hyprctl",
+                    "dispatch",
+                    "hl.dsp.exit()"
+                ],
+                "dangerous": true,
+                "description": "Log out of the current session",
+                "icon": "exit_to_app",
+                "name": "Logout"
+            },
+            {
+                "command": [
+                    "loginctl",
+                    "lock-session"
+                ],
+                "description": "Lock the current session",
+                "icon": "lock",
+                "name": "Lock"
+            },
+            {
+                "command": [
+                    "systemctl",
+                    "suspend"
+                ],
+                "description": "Suspend",
+                "icon": "bedtime",
+                "name": "Sleep"
+            },
+            {
+                "command": [
+                    "caelestia",
+                    "shell",
+                    "nexus",
+                    "open"
+                ],
+                "description": "Configure the shell",
+                "icon": "settings",
+                "name": "Settings"
+            }
+        ],
+        "dragThreshold": 50,
+        "enableDangerousActions": true,
+        "enabled": true,
+        "showOnHover": false,
+        "useFuzzy": {
+            "actions": true,
+            "apps": true,
+            "schemes": false,
+            "variants": true,
+            "wallpapers": false
+        }
+    },
+    "nexus": {
+        "networkRescanInterval": 5000
+    },
+    "services": {
+        "audioIncrement": 0.05,
+        "defaultPlayer": "Spotify",
+        "gpuType": "Auto",
+        "lyricsBackend": "Auto",
+        "useFahrenheit": false
+    },
+    "session": {
+        "commands": {
+            "hibernate": [
+                "foot",
+                "-e",
+                "bash",
+                "-c",
+                "sudo pacman -Syu; read"
+            ],
+            "logout": [
+                "hyprctl",
+                "dispatch",
+                "hl.dsp.exit()"
+            ],
+            "reboot": [
+                "systemctl",
+                "reboot"
+            ],
+            "shutdown": [
+                "systemctl",
+                "poweroff"
+            ]
+        },
+        "dragThreshold": 30,
+        "vimKeybinds": false
+    },
+    "utilities": {
+        "maxToasts": 8,
+        "toasts": {
+            "nowPlaying": true
+        }
+    }
+}

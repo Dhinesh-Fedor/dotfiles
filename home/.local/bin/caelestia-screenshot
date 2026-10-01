@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+screenshots_dir="$HOME/Pictures/Screenshots"
+mkdir -p "$screenshots_dir"
+destination="$screenshots_dir/$(date +%Y%m%d-%H%M%S).png"
+
+monitor="$(hyprctl -j monitors | jq -r '.[] | select(.focused).name' | head -n 1)"
+if [[ -n "$monitor" ]]; then
+    grim -o "$monitor" "$destination"
+else
+    grim "$destination"
+fi
+
+wl-copy --type image/png < "$destination" 2>/dev/null || true
+notify-send -a caelestia-cli -i "$destination" \
+    "Screenshot saved" "Pictures/Screenshots/$(basename "$destination")"

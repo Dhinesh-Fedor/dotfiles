@@ -1,0 +1,10 @@
+# These are part of the observed setup but are not installed automatically.
+# Install with an AUR helper you trust, after reviewing its build files.
+caelestia-cli
+caelestia-shell
+waypaper
+qtengine
+bibata-cursor-theme-bin
+zen-browser-bin
+visual-studio-code-bin
+spotify

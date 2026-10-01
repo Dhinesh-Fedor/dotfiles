@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+"""Render Waypaper's GTK stylesheet from the current Caelestia palette."""
+
+import json
+import os
+import re
+import signal
+from pathlib import Path
+
+
+HOME = Path.home()
+STATE_HOME = Path(os.environ.get("XDG_STATE_HOME", HOME / ".local/state"))
+CONFIG_HOME = Path(os.environ.get("XDG_CONFIG_HOME", HOME / ".config"))
+SCHEME_FILE = STATE_HOME / "caelestia/scheme.json"
+STYLE_FILE = CONFIG_HOME / "waypaper/style.css"
+
+FALLBACK = {
+    "background": "131317",
+    "surface": "1c1b1f",
+    "surfaceContainerHigh": "2a292e",
+    "surfaceContainerHighest": "353438",
+    "onSurface": "e5e1e7",
+    "onSurfaceVariant": "c8c5d1",
+    "primary": "c2c1ff",
+    "primaryContainer": "414178",
+    "onPrimaryContainer": "ffffff",
+    "outline": "777680",
+}
+
+
+def read_colours() -> dict[str, str]:
+    try:
+        data = json.loads(SCHEME_FILE.read_text(encoding="utf-8"))
+        colours = data["colours"]
+    except (OSError, json.JSONDecodeError, KeyError, TypeError):
+        colours = {}
+
+    result = {}
+    for key, fallback in FALLBACK.items():
+        value = str(colours.get(key, fallback)).lstrip("#")
+        result[key] = value if re.fullmatch(r"[0-9a-fA-F]{6}", value) else fallback
+    return result
+
+
+def render(colours: dict[str, str], template: str) -> str:
+    names = {
+        "cp_bg": "background",
+        "cp_surface": "surface",
+        "cp_surface_high": "surfaceContainerHigh",
+        "cp_surface_top": "surfaceContainerHighest",
+        "cp_text": "onSurface",
+        "cp_subtext": "onSurfaceVariant",
+        "cp_primary": "primary",
+        "cp_primary_container": "primaryContainer",
+        "cp_on_primary_container": "onPrimaryContainer",
+        "cp_outline": "outline",
+    }
+    definitions = "\n".join(f"@define-color {name} #{colours[key]};" for name, key in names.items())
+    rules = template.split("\n\n", 1)[-1]
+    return definitions + "\n\n" + rules
+
+
+def reload_running_waypaper() -> None:
+    proc = Path("/proc")
+    if not proc.exists():
+        return
+    for entry in proc.iterdir():
+        if not entry.name.isdigit():
+            continue
+        try:
+            args = (entry / "cmdline").read_bytes().split(b"\0")
+            is_waypaper = any(Path(arg.decode(errors="ignore")).name == "waypaper" for arg in args if arg)
+            if is_waypaper:
+                os.kill(int(entry.name), signal.SIGUSR1)
+        except (OSError, ProcessLookupError, ValueError):
+            continue
+
+
+def main() -> None:
+    template_file = CONFIG_HOME / "waypaper/style.css"
+    template = template_file.read_text(encoding="utf-8")
+    css = render(read_colours(), template)
+    STYLE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    temporary = STYLE_FILE.with_suffix(".css.tmp")
+    temporary.write_text(css, encoding="utf-8")
+    temporary.replace(STYLE_FILE)
+    reload_running_waypaper()
+
+
+if __name__ == "__main__":
+    main()

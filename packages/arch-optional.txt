@@ -1,0 +1,4 @@
+# Optional configuration alternatives. These tools are not selected by the
+# current QT_QPA_PLATFORMTHEME=qtengine setting.
+qt5ct
+qt6ct

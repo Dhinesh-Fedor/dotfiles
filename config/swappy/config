@@ -1,0 +1,5 @@
+[Default]
+save_dir=__HOME__/Pictures/Screenshots
+save_filename_format=screenshot-%Y%m%d-%H%M%S.png
+auto_save=false
+early_exit=true

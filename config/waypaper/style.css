@@ -1,0 +1,78 @@
+@define-color cp_bg #131317;
+@define-color cp_surface #1c1b1f;
+@define-color cp_surface_high #2a292e;
+@define-color cp_surface_top #353438;
+@define-color cp_text #e5e1e7;
+@define-color cp_subtext #c8c5d1;
+@define-color cp_primary #c2c1ff;
+@define-color cp_primary_container #414178;
+@define-color cp_on_primary_container #ffffff;
+@define-color cp_outline #777680;
+
+window,
+dialog {
+    background-color: @cp_bg;
+    color: @cp_text;
+}
+
+headerbar {
+    background-color: @cp_surface;
+    color: @cp_text;
+    border-bottom: 1px solid @cp_outline;
+}
+
+button {
+    color: @cp_text;
+    background-color: @cp_surface;
+    background-image: none;
+    border: 1px solid @cp_outline;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+button:hover {
+    background-color: @cp_surface_high;
+    border-color: @cp_primary;
+}
+
+button:active,
+button:checked,
+button.highlighted-button {
+    color: @cp_on_primary_container;
+    background-color: @cp_primary_container;
+    border-color: @cp_primary;
+}
+
+entry,
+spinbutton,
+combobox,
+textview {
+    color: @cp_text;
+    background-color: @cp_surface;
+    border: 1px solid @cp_outline;
+    border-radius: 8px;
+    caret-color: @cp_primary;
+}
+
+entry:focus,
+spinbutton:focus,
+combobox:focus {
+    border-color: @cp_primary;
+}
+
+selection {
+    color: @cp_on_primary_container;
+    background-color: @cp_primary_container;
+}
+
+scrollbar slider {
+    background-color: @cp_outline;
+    border-radius: 999px;
+}
+
+tooltip {
+    color: @cp_text;
+    background-color: @cp_surface_top;
+    border: 1px solid @cp_outline;
+    border-radius: 8px;
+}
